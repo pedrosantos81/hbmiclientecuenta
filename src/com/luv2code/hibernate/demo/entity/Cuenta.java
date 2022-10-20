@@ -36,7 +36,10 @@ public class Cuenta implements Serializable{
 	@Column(name="estado",columnDefinition = "boolean default true")
 	private boolean statuscuenta;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@Column(name="id_cliente",insertable = false,updatable = false)
+	private int idcliente;
+	
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL,optional = true)
 	@JoinColumn(name="id_cliente")
 	private Cliente clientes;
 

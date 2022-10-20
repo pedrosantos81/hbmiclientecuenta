@@ -47,6 +47,7 @@ public class GetClientePersonaDemo {
 			//Query q = session.createQuery("SELECT n FROM Cliente n WHERE n.persona.id =  :parentId");
 			//Query q = session.createQuery("select t from Cliente c join c.cuentas t where c.idpersona=:parentId");
 			Query q = session.createQuery("select c from Cuenta c where c.clientes.idpersona=:parentId");
+			
 			q.setParameter("parentId", 1);
 			System.out.println("test: "+q.getResultList());
 			List<Cuenta> childNodes = q.getResultList();

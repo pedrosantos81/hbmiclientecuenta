@@ -38,7 +38,7 @@ public class Cliente extends Persona implements Serializable{
 	@JoinColumn(name="IdPersona",insertable = false,updatable = false)
 	Persona persona;
 
-	@OneToMany(mappedBy="clientes",fetch = FetchType.LAZY,orphanRemoval = true)
+	@OneToMany(mappedBy="clientes",fetch = FetchType.LAZY,orphanRemoval = true,cascade = CascadeType.ALL)
 	@Fetch(FetchMode.SELECT)
 	private List<Cuenta> cuentas= new ArrayList<Cuenta>();
 	
