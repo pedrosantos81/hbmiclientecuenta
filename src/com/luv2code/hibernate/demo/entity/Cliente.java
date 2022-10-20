@@ -106,6 +106,7 @@ public class Cliente extends Persona implements Serializable{
 	}
 
 	public void addCuenta(Cuenta cuenta) {
+		cuenta.setCliente(this);
         cuentas.add(cuenta);
         
     }
