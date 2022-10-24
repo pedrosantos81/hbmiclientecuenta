@@ -43,7 +43,7 @@ public class Cuenta implements Serializable{
 	private int idcliente;
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL,optional = true)
-	@JoinColumn(name="id_cliente")
+	@JoinColumn(name="id_cliente",referencedColumnName = "IdCliente")
 	private Cliente clientes;
 
 	public Cuenta() {
@@ -99,6 +99,14 @@ public class Cuenta implements Serializable{
 	@JsonIgnore
 	public void setCliente(Cliente cliente) {
 		this.clientes = cliente;
+	}
+
+	public int getIdcliente() {
+		return idcliente;
+	}
+
+	public void setIdcliente(int idcliente) {
+		this.idcliente = idcliente;
 	}
 	
 	

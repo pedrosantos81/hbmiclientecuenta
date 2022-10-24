@@ -38,21 +38,29 @@ public class GetClientePersonaDemo {
 			
 			System.out.println("Cliente: "+tempCliente);
 			
-			List<Cuenta> lst =tempCliente.getCuentas();
+			System.out.println(tempCliente.getCuentas());
 			
-			System.out.println("empty? "+lst.isEmpty());
+			List<Cuenta> lstCuentas = tempCliente.getCuentas();
+			
+			lstCuentas.forEach(System.out::println);
+			
+			for (Cuenta cuenta:lstCuentas) {
+				System.out.println(cuenta.getNumerocuenta()+","+cuenta.getTipocuenta()+","+cuenta.getSaldoinicial());
+			}
+			
+			//System.out.println("empty? "+lst.isEmpty());
 			//get course for the instructor
 			//Cuenta tempCuentas = session.get(Cuenta.class, theId);
-			Long parentId = 1L;
-			//Query q = session.createQuery("SELECT n FROM Cliente n WHERE n.persona.id =  :parentId");
-			//Query q = session.createQuery("select t from Cliente c join c.cuentas t where c.idpersona=:parentId");
-			Query q = session.createQuery("select c from Cuenta c where c.clientes.idpersona=:parentId");
-			
-			q.setParameter("parentId", 1);
-			System.out.println("test: "+q.getResultList());
-			List<Cuenta> childNodes = q.getResultList();
-			
-			System.out.println("cuentas: "+childNodes.size());
+//			Long parentId = 1L;
+//			//Query q = session.createQuery("SELECT n FROM Cliente n WHERE n.persona.id =  :parentId");
+//			//Query q = session.createQuery("select t from Cliente c join c.cuentas t where c.idpersona=:parentId");
+//			Query q = session.createQuery("select c from Cuenta c where c.clientes.idpersona=:parentId");
+//			
+//			q.setParameter("parentId", 1);
+//			System.out.println("test: "+q.getResultList());
+//			List<Cuenta> childNodes = q.getResultList();
+//			
+//			System.out.println("cuentas: "+childNodes.size());
 			
 			//commit transaction
 			session.getTransaction().commit();

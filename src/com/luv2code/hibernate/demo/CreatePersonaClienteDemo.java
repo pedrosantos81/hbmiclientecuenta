@@ -29,14 +29,14 @@ public class CreatePersonaClienteDemo {
 		try {
 
 			// create the objects
-			Cliente tempCliente = new Cliente("Fernando Asalia","Masculino",32,"ife","Calle Mirador 33 Col Lopez Mateos","23355","821333",true);
+			Cliente tempCliente = new Cliente("Bernabe Luna","Masculino",41,"ife","Calle Sierra 123 Col Apodaca","2111","812344",true);
 			
 			//tempCliente.addCuenta(new Cuenta(TipoCuenta.AHORRO,3000,true));
 			
 //			List<Cuenta> list = new ArrayList<Cuenta>();
 //			list.add(new Cuenta(TipoCuenta.AHORRO,3000,true));
 			
-			tempCliente.addCuenta(new Cuenta(TipoCuenta.AHORRO,3000,true));
+			//tempCliente.addCuenta(new Cuenta(TipoCuenta.AHORRO,3000,true));
 			
 			
 			

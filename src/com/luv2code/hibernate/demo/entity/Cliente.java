@@ -95,17 +95,20 @@ public class Cliente extends Persona implements Serializable{
 		this.cuentas = cuentas;
 	}
 
-	@Override
-	public String toString() {
-		return "Cliente [idcliente=" + idcliente + ", pass=" + pass + 
-				", estado=" + estado + ", persona=" + persona.getNombre() +
-				", direccion=" + persona.getDireccion() +
-				", identificacion=" + persona.getIdentificacion() 
-				
-				+ "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Cliente [idcliente=" + idcliente + ", pass=" + pass + 
+//				", estado=" + estado + ", persona=" + persona.getNombre() +
+//				", direccion=" + persona.getDireccion() +
+//				", identificacion=" + persona.getIdentificacion() +
+//				", id: "+persona.getId()
+//				+ "]";
+//	}
 
 	public void addCuenta(Cuenta cuenta) {
+		if(cuentas==null) {
+			cuentas = new ArrayList<>();
+			}
 		cuenta.setCliente(this);
         cuentas.add(cuenta);
         
