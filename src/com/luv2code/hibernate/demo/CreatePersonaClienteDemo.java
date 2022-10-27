@@ -1,16 +1,13 @@
 package com.luv2code.hibernate.demo;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import com.luv2code.hibernate.demo.entity.Cliente;
 import com.luv2code.hibernate.demo.entity.Cuenta;
+import com.luv2code.hibernate.demo.entity.Movimientos;
 import com.luv2code.hibernate.demo.entity.Persona;
-import com.luv2code.hibernate.demo.entity.TipoCuenta;
 
 public class CreatePersonaClienteDemo {
 
@@ -21,6 +18,7 @@ public class CreatePersonaClienteDemo {
 				.addAnnotatedClass(Cliente.class)
 				.addAnnotatedClass(Persona.class)
 				.addAnnotatedClass(Cuenta.class)
+				.addAnnotatedClass(Movimientos.class)
 				.buildSessionFactory();
 
 		// create session
@@ -29,7 +27,7 @@ public class CreatePersonaClienteDemo {
 		try {
 
 			// create the objects
-			Cliente tempCliente = new Cliente("Bernabe Luna","Masculino",41,"ife","Calle Sierra 123 Col Apodaca","2111","812344",true);
+			Cliente tempCliente = new Cliente("Luis Zarate","Masculino",41,"ife","Calle Altamirano Col Quevedo","2111","8291922",true);
 			
 			//tempCliente.addCuenta(new Cuenta(TipoCuenta.AHORRO,3000,true));
 			

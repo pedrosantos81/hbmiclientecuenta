@@ -1,6 +1,8 @@
 package com.luv2code.hibernate.demo;
 
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -11,7 +13,7 @@ import com.luv2code.hibernate.demo.entity.Cuenta;
 import com.luv2code.hibernate.demo.entity.Movimientos;
 import com.luv2code.hibernate.demo.entity.Persona;
 
-public class GetClientePersonaDemo {
+public class GetListaMovimientos {
 
 	public static void main(String[] args) {
 		//create session factory
@@ -44,7 +46,19 @@ public class GetClientePersonaDemo {
 			lstCuentas.forEach(System.out::println);
 			
 			for (Cuenta cuenta:lstCuentas) {
-				System.out.println(cuenta.getNumerocuenta()+","+cuenta.getTipocuenta()+","+cuenta.getSaldoinicial());
+				System.out.println(cuenta.getNumerocuenta()+","+cuenta.getTipocuenta()+","+cuenta.getSaldoinicial() +", "+cuenta.getLstmovimientos());
+				
+				//cuenta.getLstmovimientos().forEach(System.out::println);
+				
+//				cuenta.getLstmovimientos().stream().map(o->{
+//					Movimientos m = new Movimientos();
+//					m.setFecha(o.getFecha());
+//					m.setIdcuenta(o.getIdcuenta());
+//					m.setIdmovimiento(o.getIdmovimiento());
+//					m.setSaldo(o.getSaldo());
+//					m.setTipomovimiento(o.getTipomovimiento());
+//					return m;
+//					}).collect(Collectors.toList());
 			}
 			
 			//System.out.println("empty? "+lst.isEmpty());
