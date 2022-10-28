@@ -1,19 +1,12 @@
 package com.luv2code.hibernate.demo;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import com.luv2code.hibernate.demo.entity.Cliente;
-import com.luv2code.hibernate.demo.entity.Course;
 import com.luv2code.hibernate.demo.entity.Cuenta;
-import com.luv2code.hibernate.demo.entity.Instructor;
-import com.luv2code.hibernate.demo.entity.InstructorDetail;
-import com.luv2code.hibernate.demo.entity.Student;
+import com.luv2code.hibernate.demo.entity.Movimientos;
 import com.luv2code.hibernate.demo.entity.TipoCuenta;
 
 public class CreateCuentaDemo {
@@ -25,6 +18,7 @@ public class CreateCuentaDemo {
 				                 .addAnnotatedClass(Cliente.class)
 				                 //.addAnnotatedClass(InstructorDetail.class)
 				                 .addAnnotatedClass(Cuenta.class)
+				                 .addAnnotatedClass(Movimientos.class)
 				                 .buildSessionFactory();
 		//create session
 		Session session = factory.getCurrentSession();
@@ -36,7 +30,7 @@ public class CreateCuentaDemo {
 			session.beginTransaction();
 			
 			//get the instructor from db
-			int theId=3;
+			int theId=6;
 			//Instructor tempInstructor = session.get(Instructor.class, theId);
 			Cliente tempCliente = session.get(Cliente.class,theId);
 			
@@ -44,8 +38,8 @@ public class CreateCuentaDemo {
 			
 			
 			
-			Cuenta tempCuenta1 = new Cuenta(TipoCuenta.AHORRO,8500,true);
-			Cuenta tempCuenta2 = new Cuenta(TipoCuenta.CORRIENTE,4000,true);
+			Cuenta tempCuenta1 = new Cuenta(TipoCuenta.AHORRO,10600,true);
+			Cuenta tempCuenta2 = new Cuenta(TipoCuenta.CORRIENTE,3560.70,true);
 			
 			tempCliente.addCuenta(tempCuenta1);
 			tempCliente.addCuenta(tempCuenta2);

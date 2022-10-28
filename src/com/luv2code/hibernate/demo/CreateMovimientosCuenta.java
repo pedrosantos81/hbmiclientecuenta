@@ -34,10 +34,10 @@ public class CreateMovimientosCuenta {
 			session.beginTransaction();
 			
 			//get the instructor from db
-			int theId=1;
-			TipoCuenta tipoacc = TipoCuenta.valueOf("AHORRO");
-			double cantidad=4000;
-			TipoTransaccion tt = TipoTransaccion.valueOf("ABONO");
+			int theId=6;
+			TipoCuenta tipoacc = TipoCuenta.valueOf("CORRIENTE");
+			double cantidad=500;
+			TipoTransaccion tt = TipoTransaccion.valueOf("ABONO"); //Tipo de transaccion
 			//Instructor tempInstructor = session.get(Instructor.class, theId);
 			Cliente tempCliente = session.get(Cliente.class,theId);
 			
@@ -49,13 +49,14 @@ public class CreateMovimientosCuenta {
 			String hql="select c from Cuenta c where id_cliente=:idcliente and tipocuenta=:tipocuenta";
 			System.out.println( session.createQuery(hql)
 					.setParameter("idcliente", tempCliente.getIdcliente())
-					.setParameter("tipocuenta", TipoCuenta.AHORRO)
+					.setParameter("tipocuenta", TipoCuenta.CORRIENTE)
 					.getSingleResult()
 					);
 			
-			List<Cuenta> lst =session.createQuery(hql,Cuenta.class).setParameter("idcliente", tempCliente.getIdcliente()).setParameter("tipocuenta", TipoCuenta.AHORRO).getResultList();
+			List<Cuenta> lst =session.createQuery(hql,Cuenta.class).setParameter("idcliente", tempCliente.getIdcliente()).setParameter("tipocuenta", TipoCuenta.CORRIENTE).getResultList();
 			
-			Cuenta acc =session.createQuery(hql,Cuenta.class).setParameter("idcliente", tempCliente.getIdcliente()).setParameter("tipocuenta", TipoCuenta.AHORRO).getSingleResult();
+			//Obtengo la cuenta de la persona
+			Cuenta acc =session.createQuery(hql,Cuenta.class).setParameter("idcliente", tempCliente.getIdcliente()).setParameter("tipocuenta", TipoCuenta.CORRIENTE).getSingleResult();
 			
 			System.out.println("idcliente: "+acc.getIdcliente());
 			
@@ -68,30 +69,11 @@ public class CreateMovimientosCuenta {
 			
 			session.save(movimiento);
 			
-//			Cuenta tempCuenta1 = new Cuenta(TipoCuenta.AHORRO,8500,true);
-//			Cuenta tempCuenta2 = new Cuenta(TipoCuenta.CORRIENTE,4000,true);
-//			
-//			tempCliente.addCuenta(tempCuenta1);
-//			tempCliente.addCuenta(tempCuenta2);
-//			session.save(tempCuenta1);
-//			session.save(tempCuenta2);
-			
-//			//create some courses
-//			Course tempCourse1 = new Course("Air Guitar - The ultimate guide");
-//			Course tempCourse2 = new Course("The Pinball Masterclass");
-//			
-//			//add courses to instructor
-//			tempInstructor.add(tempCourse1);
-//			tempInstructor.add(tempCourse2);
-//			
-//			//save the courses
-//			session.save(tempCourse1);
-//			session.save(tempCourse2);
 			
 			//commit transaction
 			session.getTransaction().commit();
 			
-			System.out.println("Success save cuenta!");
+			System.out.println("Success save movimiento!");
 		}catch (Exception exc) {
             exc.printStackTrace();
         }finally {
