@@ -29,9 +29,8 @@ public class CreateCuentaDemo {
 			//start a transaction 
 			session.beginTransaction();
 			
-			//get the instructor from db
+			//get the Cliente from db
 			int theId=6;
-			//Instructor tempInstructor = session.get(Instructor.class, theId);
 			Cliente tempCliente = session.get(Cliente.class,theId);
 			
 			System.out.println(tempCliente.toString());
