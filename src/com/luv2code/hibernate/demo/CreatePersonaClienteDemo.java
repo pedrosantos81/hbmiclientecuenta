@@ -27,7 +27,7 @@ public class CreatePersonaClienteDemo {
 		try {
 
 			// create the objects
-			Cliente tempCliente = new Cliente("Luis Zarate","Masculino",41,"ife","Calle Altamirano Col Quevedo","2111","8291922",true);
+			Cliente tempCliente = new Cliente("Bernabe Luna","Masculino",41,"ife","Calle Altamirano Col Quevedo","8777","222",true);
 			
 			//tempCliente.addCuenta(new Cuenta(TipoCuenta.AHORRO,3000,true));
 			
