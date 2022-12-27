@@ -1,8 +1,8 @@
 package com.luv2code.hibernate.demo;
 
 import java.util.List;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
+
+import javax.persistence.Query;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,6 +12,7 @@ import com.luv2code.hibernate.demo.entity.Cliente;
 import com.luv2code.hibernate.demo.entity.Cuenta;
 import com.luv2code.hibernate.demo.entity.Movimientos;
 import com.luv2code.hibernate.demo.entity.Persona;
+import com.luv2code.hibernate.utils.Utilerias;
 
 public class GetListaMovimientos {
 
@@ -34,21 +35,25 @@ public class GetListaMovimientos {
 			session.beginTransaction();
 			
 			//get the instructor from db
-			int theId=1;
+			int theId=4;
 			Cliente tempCliente = session.get(Cliente.class, theId);
 			
 			System.out.println("Cliente: "+tempCliente);
 			
-			System.out.println(tempCliente.getCuentas());
+			System.out.println(tempCliente.getCuentas().size());
 			
 			List<Cuenta> lstCuentas = tempCliente.getCuentas();
 			
-			lstCuentas.forEach(System.out::println);
+			//lstCuentas.forEach(System.out::println);
 			
 			for (Cuenta cuenta:lstCuentas) {
-				System.out.println(cuenta.getNumerocuenta()+","+cuenta.getTipocuenta()+","+cuenta.getSaldoinicial() +", "+cuenta.getLstmovimientos());
+				System.out.println(cuenta.getNumerocuenta()+","+cuenta.getTipocuenta()+","+cuenta.getSaldoinicial() );
 				
-				//cuenta.getLstmovimientos().forEach(System.out::println);
+				List<Movimientos> lst = cuenta.getLstmovimientos();
+				
+				for(Movimientos m:lst) {
+					System.out.println(m.getIdmovimiento()+"-"+m.getTipomovimiento()+"-"+m.getSaldo());
+				}
 				
 //				cuenta.getLstmovimientos().stream().map(o->{
 //					Movimientos m = new Movimientos();
@@ -75,6 +80,26 @@ public class GetListaMovimientos {
 //			
 //			System.out.println("cuentas: "+childNodes.size());
 			
+			String queryCuentaMovimientosByCliente="select "
+					+ "m.fecha as fecha, "
+					+ "p.nombre as cliente, "
+					+ "c.numerocuenta as numerocuenta, "
+					+ "c.tipocuenta as tipo, "
+					+ "m.saldo as saldoinicial, "
+					+ "m.valor as movimiento,  "
+					+ "c.saldoinicial as saldodisponible  "
+					+ "from Cliente S join Persona p on S.idpersona=p.id "
+					+ "join Cuenta c on c.idcliente=S.idcliente "
+					+ "join Movimientos m on m.idcuenta=c.numerocuenta "
+					+ "where p.id=:id "
+					+ "and DATE(m.fecha) between :startDate and :endDate";
+			Query q = session.createQuery(queryCuentaMovimientosByCliente);
+			q.setParameter("id", 2);
+			q.setParameter("startDate", Utilerias.parseDate("2022-11-02"));
+			q.setParameter("endDate",Utilerias.parseDate("2022-11-02"));
+			List lsta= q.getResultList();
+			
+			System.out.println(lsta.size());
 			//commit transaction
 			session.getTransaction().commit();
 			

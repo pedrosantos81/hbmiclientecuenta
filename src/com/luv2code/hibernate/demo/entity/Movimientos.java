@@ -1,5 +1,6 @@
 package com.luv2code.hibernate.demo.entity;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -10,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -24,10 +27,10 @@ public class Movimientos {
 	@Column(name="IdMovimiento")
 	private int idmovimiento;
 	
-	@Column(name="fecha",nullable = false, updatable = false)
+	@Column(name="fecha", updatable = false)
 	@CreationTimestamp
 	private Date fecha;
-	
+
 	@Column(name="tipomovimiento")
 	private String tipomovimiento;
 	
@@ -113,7 +116,8 @@ public class Movimientos {
 
 	@Override
 	public String toString() {
-		return "Movimientos [idmovimiento=" + idmovimiento + ", fecha=" + fecha + ", tipomovimiento=" + tipomovimiento
+		return "Movimientos [idmovimiento=" + idmovimiento 
+				//+ ", fecha=" + fecha + ", tipomovimiento=" + tipomovimiento
 				+ ", valor=" + valor + ", saldo=" + saldo + ", idcuenta=" + idcuenta + ", cuentas=" + cuentas + "]";
 	}
 

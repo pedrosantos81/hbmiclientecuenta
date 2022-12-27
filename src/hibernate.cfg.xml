@@ -14,6 +14,9 @@
 
         <!-- JDBC connection pool settings ... using built-in test pool -->
         <property name="connection.pool_size">1</property>
+        
+        <property name="hibernate.jdbc.time_zone">America/Mexico_City</property>
+        
 
         <!-- Select our SQL dialect -->
         <property name="dialect">org.hibernate.dialect.MySQLDialect</property>

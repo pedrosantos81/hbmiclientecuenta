@@ -1,6 +1,10 @@
 package com.luv2code.hibernate.demo;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import javax.persistence.TypedQuery;
 
@@ -15,6 +19,8 @@ import com.luv2code.hibernate.demo.entity.TipoCuenta;
 import com.luv2code.hibernate.demo.entity.TipoTransaccion;
 
 public class CreateMovimientosCuenta {
+	
+	private static final String DATE_FORMAT = "dd-MM-yyyy hh:mm:ss a";
 
 	public static void main(String[] args) {
 		//create session factory
@@ -29,14 +35,14 @@ public class CreateMovimientosCuenta {
 		
 		try {
 			
-			
+			//TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
 			//start a transaction 
 			session.beginTransaction();
 			
 			//get the instructor from db
-			int theId=6;
+			int theId=4;
 			TipoCuenta tipoacc = TipoCuenta.valueOf("CORRIENTE");
-			double cantidad=500;
+			double cantidad=40;
 			TipoTransaccion tt = TipoTransaccion.valueOf("ABONO"); //Tipo de transaccion
 			//Instructor tempInstructor = session.get(Instructor.class, theId);
 			Cliente tempCliente = session.get(Cliente.class,theId);
@@ -47,11 +53,11 @@ public class CreateMovimientosCuenta {
 			Cuenta tempCuenta = session.get(Cuenta.class, tempCliente.getId());
 			
 			String hql="select c from Cuenta c where id_cliente=:idcliente and tipocuenta=:tipocuenta";
-			System.out.println( session.createQuery(hql)
-					.setParameter("idcliente", tempCliente.getIdcliente())
-					.setParameter("tipocuenta", TipoCuenta.CORRIENTE)
-					.getSingleResult()
-					);
+//			System.out.println( session.createQuery(hql)
+//					.setParameter("idcliente", tempCliente.getIdcliente())
+//					.setParameter("tipocuenta", TipoCuenta.CORRIENTE)
+//					.getSingleResult()
+//					);
 			
 			List<Cuenta> lst =session.createQuery(hql,Cuenta.class).setParameter("idcliente", tempCliente.getIdcliente()).setParameter("tipocuenta", TipoCuenta.CORRIENTE).getResultList();
 			
@@ -66,6 +72,32 @@ public class CreateMovimientosCuenta {
 		   
 			acc.addMovimiento(movimiento);
 			acc.setSaldoinicial(lst.get(0).getSaldoinicial()+cantidad);
+		
+//			Date creacionmov = new Date();
+//			movimiento.setFecha(creacionmov);
+			
+//			Calendar calendar = Calendar.getInstance();
+//			Date date = calendar.getTime();
+//
+//			// format with tz
+//	        TimeZone timeZone = TimeZone.getTimeZone("America/Mexico_City");
+//	        SimpleDateFormat formatterWithTimeZone = new SimpleDateFormat(DATE_FORMAT);
+//	        formatterWithTimeZone.setTimeZone(timeZone);
+//
+//	        // change tz using formatter
+//	        String sDate = formatterWithTimeZone.format(date);
+//
+//	        // string to object date
+//	        SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
+//	        Date dateWithTimeZone = formatter.parse(sDate); // string to Date Object
+//
+//			System.out.println(dateWithTimeZone);
+//			 System.out.println("Object date: " + formatter.format(dateWithTimeZone));
+//			 movimiento.setFecha(dateWithTimeZone);
+//			System.out.println("fecha a insertar: "+movimiento.getFecha());
+			
+			
+			
 			
 			session.save(movimiento);
 			
